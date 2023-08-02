@@ -9,5 +9,6 @@ data class TaskModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val title: String,
-    val desc: String
+    val desc: String,
+    val check: Boolean? = null
 ) : Serializable

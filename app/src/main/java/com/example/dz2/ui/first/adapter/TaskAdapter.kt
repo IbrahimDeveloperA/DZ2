@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dz2.data.TaskModel
 import com.example.dz2.databinding.ItemListBinding
 
-class TaskAdapter(val deleteClick:(TaskModel)->Unit):
+class TaskAdapter(val deleteClick:(TaskModel)->Unit,val onClick:(TaskModel)->Unit):
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     var list = mutableListOf<TaskModel>()
@@ -39,6 +39,9 @@ class TaskAdapter(val deleteClick:(TaskModel)->Unit):
             itemView.setOnLongClickListener {
                 deleteClick(taskModel)
                 false
+            }
+            itemView.setOnClickListener {
+                onClick(taskModel)
             }
         }
 

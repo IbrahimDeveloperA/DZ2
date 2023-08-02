@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 class AppModel {
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "love_list")
+        return Room.databaseBuilder(context, AppDatabase::class.java, "task_list")
             .allowMainThreadQueries().build()
     }
 

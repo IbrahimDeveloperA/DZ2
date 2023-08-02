@@ -15,26 +15,36 @@ import dagger.hilt.android.AndroidEntryPoint
 class FirstFragment : BaseFragment<FragmentFirstBinding>(R.layout.fragment_first) {
 
     private lateinit var adapter: TaskAdapter
-    private lateinit var viewModel:FirstViewModel
+    private lateinit var viewModel: FirstViewModel
 
     override fun inflateViewBinding(): FragmentFirstBinding {
         return FragmentFirstBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
-        adapter = TaskAdapter(this::deleteClick)
+        adapter = TaskAdapter(this::deleteClick, this::onClick)
         binding.recyclerView.adapter = adapter
         viewModel = ViewModelProvider(requireActivity())[FirstViewModel::class.java]
         setData()
         binding.btnFab.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, SecondFragment()).commit()
+            replaceActivity()
         }
+    }
+
+    private fun replaceActivity() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, SecondFragment()).commit()
     }
 
     private fun setData() {
         val list = viewModel.getData()
         adapter.addData(list)
+    }
+
+    private fun onClick(taskModel: TaskModel) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, SecondFragment()).commit()
+        setData()
     }
 
     private fun deleteClick(taskModel: TaskModel) {
