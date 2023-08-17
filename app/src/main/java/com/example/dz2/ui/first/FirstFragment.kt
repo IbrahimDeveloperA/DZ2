@@ -22,13 +22,19 @@ class FirstFragment : BaseFragment<FragmentFirstBinding>(R.layout.fragment_first
     }
 
     override fun initView() {
-        adapter = TaskAdapter(this::deleteClick, this::onClick)
+        adapter = TaskAdapter(this::deleteClick, this::onClick,this::onClickOnCheckBox)
         binding.recyclerView.adapter = adapter
         viewModel = ViewModelProvider(requireActivity())[FirstViewModel::class.java]
         setData()
         binding.btnFab.setOnClickListener {
             replaceActivity()
         }
+    }
+
+    private fun onClickOnCheckBox(taskModel: TaskModel) {
+        viewModel.updateData(taskModel)
+        viewModel.updateData(taskModel)
+        setData()
     }
 
     private fun replaceActivity() {
@@ -38,12 +44,15 @@ class FirstFragment : BaseFragment<FragmentFirstBinding>(R.layout.fragment_first
 
     private fun setData() {
         val list = viewModel.getData()
+        for (task in list) {
+            if (task.check == true) {
+                adapter.addTrueCheckBox(task) // Добавляем элементы с true checkBox в начало списка
+            }
+        }
         adapter.addData(list)
     }
 
     private fun onClick(taskModel: TaskModel) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, SecondFragment()).commit()
         setData()
     }
 

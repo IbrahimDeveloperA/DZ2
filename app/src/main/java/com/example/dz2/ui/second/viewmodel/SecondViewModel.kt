@@ -9,9 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SecondViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    fun updateData(taskModel: TaskModel) {
-        repository.updateData(taskModel)
-    }
+
 
     fun insertData(taskModel: TaskModel) {
         repository.insert(taskModel)

@@ -17,5 +17,13 @@ class FirstViewModel @Inject constructor(private val repository: Repository):Vie
         repository.deleteData(taskModel)
     }
 
+    fun insertData(taskModel: TaskModel) {
+        repository.insert(taskModel)
+    }
+
+    fun updateData(taskModel: TaskModel) {
+        repository.updateData(taskModel)
+    }
+
 
 }

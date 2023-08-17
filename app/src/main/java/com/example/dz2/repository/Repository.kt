@@ -19,7 +19,10 @@ class Repository @Inject constructor(private val dao: TaskDao) {
         dao.deleteData(taskModel)
     }
 
-    fun updateData(taskModel: TaskModel){
+    //    fun updateData(taskModel: TaskModel){
+//        dao.updateData(taskModel)
+//    }
+    fun updateData(taskModel: TaskModel) {
         dao.updateData(taskModel)
     }
 

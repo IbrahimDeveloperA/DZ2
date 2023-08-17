@@ -8,7 +8,7 @@ import java.io.Serializable
 data class TaskModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val title: String,
-    val desc: String,
-    val check: Boolean? = null
+    val title: String?= null,
+    val desc: String? = null,
+    val check: Boolean? = false
 ) : Serializable
